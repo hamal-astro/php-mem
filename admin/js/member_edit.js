@@ -32,15 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
 				} else if (data.result == 'fail') {
 					document.input_form.email_chk.value = '0';
 					alert('이미 사용 중인 이메일 입니다. 다른 이메일을 입력해 주세요.');
-					f.email.value = '';
-					f.email.focus();
+					f_email.value = '';
+					f_email.focus();
 				} else if (data.result == 'empty_email') {
 					alert('이메일이 비어 있습니다.');
-					f.email.focus();
+					f_email.focus();
 				} else if (data.result == 'email_format_wrong') {
 					alert('이메일이 형식에 맞지 않습니다.');
-					f.email.value = '';
-					f.email.focus();
+					f_email.value = '';
+					f_email.focus();
 				}
 			}
 		};
@@ -74,10 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				let extra_addr = '';
 				if (data.userSelectedType == 'J') {
 					addr = data.jibunAddress;
-					//
 				} else if (data.userSelectedType == 'R') {
 					addr = data.roadAddress;
-					//
 				}
 
 				if (data.bname != '') {

@@ -27,7 +27,6 @@ $row = $mem->getInfoFormIdx($idx);
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <main class="w-75 mx-auto border rounded-5 p-5">
   <h1 class="text-center">회원정보 수정</h1>
-  <!-- enctype은 파일업로드때문에 필요함 -->
   <form name="input_form" method="post" enctype="multipart/form-data" autocomplete="off" action="pg/member_process.php">
     <input type="hidden" name="mode" value="edit">
     <input type="hidden" name="idx" value="<?= $row['idx']; ?>">
@@ -48,8 +47,8 @@ $row = $mem->getInfoFormIdx($idx);
         <input type="text" name="name" value="<?= $row['name']; ?>" class="form-control" id="f_name" placeholder="이름을 입력해 주세요.">
       </div>
       <div class="w-25">
-        <label for="f_name" class="form-label">레벨</label>
-        <select name="" id="" class="form-select">
+        <label for="f_level" class="form-label">레벨</label>
+        <select name="level" id="f_level" class="form-select">
           <option value="1" <?php if ($row['level'] == 1) echo " selected"; ?>>가입대기</option>
           <option value="2" <?php if ($row['level'] == 2) echo " selected"; ?>>준회원</option>
           <option value="3" <?php if ($row['level'] == 3) echo " selected"; ?>>정회원</option>
@@ -59,11 +58,11 @@ $row = $mem->getInfoFormIdx($idx);
     </div>
 
     <div class="d-flex mt-3 gap-2 justify-content-between">
-      <div class="flex-grow-1">
+      <div class="w-50">
         <label for="f_password" class="form-label">비밀번호</label>
         <input type="password" name="password" class="form-control" id="f_password" placeholder="비밀번호를 입력해 주세요.">
       </div>
-      <div class="flex-grow-1">
+      <div class="w-50">
         <label for="f_password2" class="form-label">비밀번호 확인</label>
         <input type="password" name="password2" class="form-control" id="f_password2" placeholder="비밀번호를 입력해 주세요.">
       </div>
@@ -89,11 +88,11 @@ $row = $mem->getInfoFormIdx($idx);
     <div class="d-flex mt-3 gap-2 justify-content-between">
       <div class="flex-grow-1">
         <label for="f_addr1" class="form-label">주소</label>
-        <input type="text" class="form-control" value="<?= $row['addr1']; ?>" readonly name="addr1" id="f_addr1" placeholder="">
+        <input type="text" class="form-control" readonly name="addr1" id="f_addr1" placeholder="" value="<?= $row['addr1']; ?>">
       </div>
       <div class="flex-grow-1">
         <label for="f_addr2" class="form-label">상세주소</label>
-        <input type="text" class="form-control" value="<?= $row['addr2']; ?>" name="addr2" id="f_addr2" placeholder="상세주소를 입력해 주세요">
+        <input type="text" class="form-control" name="addr2" id="f_addr2" placeholder="상세주소를 입력해 주세요" value="<?= $row['addr2']; ?>">
       </div>
     </div>
 
@@ -102,7 +101,6 @@ $row = $mem->getInfoFormIdx($idx);
         <label for="f_photo" class="form-label">프로필이미지</label>
         <input type="file" name="photo" id="f_photo" class="form-control">
       </div>
-
       <?php if ($row['photo'] != '') {
         echo '<img src="../data/profile/' . $row['photo'] . '" id="f_preview" class="w-25" alt="profile image">';
       } else {
@@ -112,8 +110,8 @@ $row = $mem->getInfoFormIdx($idx);
     </div>
 
     <div class="mt-3 d-flex gap-2">
-      <button type="button" class="btn btn-primary flex-grow-1" id="btn_submit">수정확인</button>
-      <button type="button" class="btn btn-secondary flex-grow-1">수정취소</button>
+      <button type="button" class="btn btn-primary w-50" id="btn_submit">수정확인</button>
+      <button type="button" class="btn btn-secondary w-50">수정취소</button>
     </div>
   </form>
 </main>
