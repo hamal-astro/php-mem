@@ -16,3 +16,8 @@ try {
 } catch (PDOException $e) {
   echo $e->getMessage();
 }
+
+define("DOCUMENT_ROOT", $_SERVER['DOCUMENT_ROOT']);
+define("ADMIN_DIR", DOCUMENT_ROOT . '/admin');
+define('DATA_DIR', DOCUMENT_ROOT . '/data');
+define('PROFILE_DIR', DATA_DIR . '/profile');

@@ -19,18 +19,9 @@ $old_photo = (isset($_POST['old_photo']) && $_POST['old_photo'] != '') ? $_POST[
 // 회원정보 이미지 수정
 
 if (isset($_FILES['photo']) && $_FILES['photo']['name'] != '') {
-  // 기존 사진을 삭제
-  if ($old_photo != '') {
-    unlink("../../data/profile/" . $old_photo);
-  }
-  // 새 이미지 대입
-  $tmparr = explode('.', $_FILES['photo']['name']);
-  $ext = end($tmparr); // 새이미지의 확장자 추출
-  $photo = $id . '.' . $ext; // 새 파일 명
 
-  copy($_FILES['photo']['tmp_name'], "../../data/profile/" . $photo);
-
-  $old_photo = $photo;
+  $new_photo = $_FILES['photo'];
+  $old_photo=$mem->profile_upload($id,$new_photo,$old_photo);
 }
 
 // session_start();

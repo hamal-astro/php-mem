@@ -102,7 +102,7 @@ $row = $mem->getInfoFormIdx($idx);
         <input type="file" name="photo" id="f_photo" class="form-control">
       </div>
       <?php if ($row['photo'] != '') {
-        echo '<img src="../data/profile/' . $row['photo'] . '" id="f_preview" class="w-25" alt="profile image">';
+        echo '<img src="../data/profile/' . $row['photo'] . '?v='.date('His').'" id="f_preview" class="w-25" alt="profile image">';
       } else {
         echo '<img src="../images/Unknown_person.jpg" id="f_preview" class="w-25" alt="profile image">';
       }
