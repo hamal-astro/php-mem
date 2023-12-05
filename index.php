@@ -5,7 +5,7 @@ $ses_id = (isset($_SESSION['ses_id']) && $_SESSION['ses_id'] != '') ? $_SESSION[
 $ses_level = (isset($_SESSION['ses_level']) && $_SESSION['ses_level'] != '') ? $_SESSION['ses_level'] : '';
 
 $g_title = "네카라쿠배";
-$js_array = ['js/member_success.js'];
+//$js_array = ['js/member_success.js'];
 
 $menu_code = 'home';
 

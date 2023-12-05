@@ -1,7 +1,7 @@
 <?php
 
 $g_title = "네카라쿠배";
-$js_array = ['js/member_success.js'];
+//$js_array = ['js/member_success.js'];
 
 $menu_code = 'home';
 

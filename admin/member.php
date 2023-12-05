@@ -25,7 +25,6 @@ $page_limit = 5;
 $page = (isset($_GET['page']) && $_GET['page'] != '' && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
 
 $param = '';
-
 $memArr = $mem->list($page, $limit, $paramArr);
 ?>
 <main class='border rounded-2 p-5 ' style="height: calc(100vh - 257px)">
