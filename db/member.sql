@@ -66,3 +66,31 @@ VALUES (
         0,
         NOW()
     );
+
+-- 게시판 생성 / 여러 게시판을 코드로 분리하여 관리
+
+CREATE TABLE
+    board (
+        `idx` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+        `bcode` CHAR(6) DEFAULT '' COMMENT '게시판코드',
+        `id` VARCHAR(50) DEFAULT '' COMMENT '아이디',
+        `name` VARCHAR(50) DEFAULT '' COMMENT '이름',
+        `subject` VARCHAR(255) DEFAULT '' COMMENT '제목',
+        `content` MEDIUMTEXT COMMENT '내용',
+        `hit` INTEGER UNSIGNED DEFAULT 0 COMMENT '조회 수',
+        `ip` VARCHAR(30) DEFAULT '' COMMENT '글쓴이 ip',
+        `create_at` DATETIME NOT NULL COMMENT '글 등록일시',
+        INDEX `bcode` (`bcode`),
+        INDEX `id` (`id`),
+        PRIMARY KEY (idx)
+    );
+
+show index from board;
+
+alter table board add index `bcode`(`bcode`);
+
+alter table board add index `bcode_id`(`bcode`, `id`);
+
+ALTER TABLE board DROP INDEX `bcode_id`;
+
+DROP Table board;

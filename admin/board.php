@@ -25,7 +25,7 @@ $boardArr = $board->list();
     <h3>게시판관리</h3>
   </div>
 
-  <table class="table table-boarder">
+  <table class="table table-boarder table-hover">
     <tr>
       <th>번호</th>
       <th>게시판 이름</th>
@@ -47,11 +47,13 @@ $boardArr = $board->list();
         <td><?= $row['cnt']; ?></td>
         <td><?= $row['create_at']; ?></td>
         <td>
-          <button class="btn btn-primary btn-sm btn_mem_edit" data-idx="<?= $row['idx']; ?>">수정</button>
+          <button class="btn btn-primary btn-sm btn_mem_edit" data-bs-toggle="modal" data-bs-target="#board_create_modal" data-idx="<?= $row['idx']; ?>">수정</button>
           <button class="btn btn-danger btn-sm btn_mem_delete" data-idx="<?= $row['idx']; ?>">삭제</button>
         </td>
       </tr>
-    <?php } ?>
+    <?php
+    }
+    ?>
   </table>
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#board_create_modal" id="btn_create_modal">게시판 생성</button>
 </main>
