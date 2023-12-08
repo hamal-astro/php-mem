@@ -56,6 +56,7 @@ $boardArr = $board->list();
     ?>
   </table>
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#board_create_modal" id="btn_create_modal">게시판 생성</button>
+  </div>
 </main>
 
 <!-- Modal -->
@@ -63,7 +64,7 @@ $boardArr = $board->list();
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="ModalTitle">게시판 생성</h1>
+        <h1 class="modal-title fs-5" id="modalTitle">게시판 수정</h1>
         <input type="hidden" name="mode" id="board_mode" value="">
         <input type="hidden" name="idx" id="board_idx" value="">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -76,7 +77,7 @@ $boardArr = $board->list();
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
         <button type="button" class="btn btn-primary" id="btn_board_create">확인</button>
       </div>
     </div>

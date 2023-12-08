@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const f = new FormData();
 		f.append('board_title', board_title.value);
 		f.append('board_type', document.querySelector('#board_type').value);
-		f.append('mode', 'input');
+		f.append('mode', board_mode.value);
 		f.append('idx', document.querySelector('#board_idx').value);
 
 		xhr.open('POST', './pg/board_process.php', true);
@@ -58,14 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		board_title.value == '';
 		const board_mode = document.querySelector('#board_mode');
 		board_mode.value = 'input';
-		document.querySelector('#ModalTitle').textContent = '게시판 생성';
+		document.querySelector('#modalTitle').textContent = '게시판 생성';
 	});
 
-	// 수정 버튼
+	// 수정 버튼 클릭
 	const btn_mem_edit = document.querySelectorAll('.btn_mem_edit');
 	btn_mem_edit.forEach((box) => {
 		box.addEventListener('click', () => {
-			document.querySelector('#ModalTitle').textContent = '게시판 수정';
+			document.querySelector('#modalTitle').textContent = '게시판 수정';
 
 			const board_mode = document.querySelector('#board_mode');
 			board_mode.value = 'edit';
