@@ -59,11 +59,11 @@ $boardArr = $board->list();
 </main>
 
 <!-- Modal -->
-<div class="modal fade" id="board_create_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="board_create_modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">게시판 생성</h1>
+        <h1 class="modal-title fs-5" id="ModalTitle">게시판 생성</h1>
         <input type="hidden" name="mode" id="board_mode" value="">
         <input type="hidden" name="idx" id="board_idx" value="">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

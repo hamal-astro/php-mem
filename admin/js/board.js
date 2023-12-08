@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const board_title = document.querySelector('#board_title');
 	const btn_board_create = document.querySelector('#btn_board_create');
-	const btn_create_modal = document.querySelector('#btn_create_modal');
+	//const btn_create_modal = document.querySelector('#btn_create_modal');
 
 	btn_board_create.addEventListener('click', () => {
 		if (board_title.value == '') {
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		f.append('board_title', board_title.value);
 		f.append('board_type', document.querySelector('#board_type').value);
 		f.append('mode', 'input');
+		f.append('idx', document.querySelector('#board_idx').value);
 
 		xhr.open('POST', './pg/board_process.php', true);
 		xhr.send(f);
@@ -41,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				} else if (data.result == 'success') {
 					alert('게시판이 생성되었습니다.');
 					self.location.reload();
+				} else if (data.result == 'edit_success') {
+					alert('게시판이 수정되었습니다.');
+					self.location.reload();
 				}
 			} else {
 				alert('통신 실패' + xhr.status);
@@ -54,16 +58,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		board_title.value == '';
 		const board_mode = document.querySelector('#board_mode');
 		board_mode.value = 'input';
+		document.querySelector('#ModalTitle').textContent = '게시판 생성';
 	});
 
 	// 수정 버튼
 	const btn_mem_edit = document.querySelectorAll('.btn_mem_edit');
 	btn_mem_edit.forEach((box) => {
 		box.addEventListener('click', () => {
+			document.querySelector('#ModalTitle').textContent = '게시판 수정';
+
 			const board_mode = document.querySelector('#board_mode');
 			board_mode.value = 'edit';
-
 			const idx = box.dataset.idx;
+
+			const board_idx = document.querySelector('#board_idx');
+			board_idx.value = idx;
+
 			const f = new FormData();
 			f.append('idx', idx);
 			f.append('mode', 'getInfo');
@@ -71,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const xhr = new XMLHttpRequest();
 			xhr.open('post', 'pg/board_process.php', true);
 			xhr.send(f);
+
 			xhr.onload = () => {
 				if (xhr.status == 200) {
 					const data = JSON.parse(xhr.responseText);
@@ -78,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						alert('idx 값이 누락되었습니다.');
 						return false;
 					} else if (data.result == 'success') {
-						board_title.value = data.list.name;
+						document.querySelector('#board_title').value = data.list.name;
 						document.querySelector('#board_type').value = data.list.btype;
 					}
 				} else {

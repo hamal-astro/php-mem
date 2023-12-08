@@ -34,6 +34,17 @@ class Board
     $stmt->execute();
   }
 
+  // 게시판 정보 수정
+  public function update($arr)
+  {
+    $sql = "UPDATE board_manage SET name=:name,btype=:btype where idx=:idx";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(':name', $arr['name']);
+    $stmt->bindValue(':btype', $arr['btype']);
+    $stmt->bindValue(':idx', $arr['idx']);
+    $stmt->execute();
+  }
+
   // 게시판 idx로 정보 가져오기 
   public function getBcode($idx)
   {
