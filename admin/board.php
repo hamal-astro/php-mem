@@ -8,14 +8,14 @@ $menu_code = 'board';
 include 'header.php';
 include 'common.php';
 include '../inc/dbconfig.php';
-include '../inc/board.php'; // 회원관리 클래스
+include '../inc/boardmanage.php'; // 회원관리 클래스
 include '../inc/lib.php'; // 페이지네이션 함수
 
 $sn = (isset($_GET['sn']) && $_GET['sn'] != '' && is_numeric($_GET['sn'])) ? $_GET['sn'] : '';
 $sf = (isset($_GET['sf']) && $_GET['sf'] != '') ? $_GET['sf'] : '';
 
 $paramArr = ['sn' => $sn, 'sf' => $sf];
-$board = new Board($db);
+$board = new BoardManage($db);
 
 $boardArr = $board->list();
 ?>
@@ -47,6 +47,7 @@ $boardArr = $board->list();
         <td><?= $row['cnt']; ?></td>
         <td><?= $row['create_at']; ?></td>
         <td>
+          <button class="btn btn-success btn-sm btn_board_view" data-bcode="<?= $row['bcode']; ?>">보기</button>
           <button class="btn btn-primary btn-sm btn_mem_edit" data-bs-toggle="modal" data-bs-target="#board_create_modal" data-idx="<?= $row['idx']; ?>">수정</button>
           <button class="btn btn-danger btn-sm btn_mem_delete" data-idx="<?= $row['idx']; ?>">삭제</button>
         </td>

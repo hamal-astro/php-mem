@@ -115,7 +115,7 @@ class Member
 
   public function getInfo($id)
   {
-    $sql = 'select * from member where id=:id';
+    $sql = 'SELECT * from member where id=:id';
     $stmt = $this->conn->prepare($sql);
     $stmt->bindParam(':id', $id);
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -249,19 +249,19 @@ class Member
   }
 
 
- //프로필 이미지 업로드
-public function profile_upload($id,$new_photo,$old_photo='') {
-  if ($old_photo != '') {
-    unlink(PROFILE_DIR . $old_photo);
+  //프로필 이미지 업로드
+  public function profile_upload($id, $new_photo, $old_photo = '')
+  {
+    if ($old_photo != '') {
+      unlink(PROFILE_DIR . $old_photo);
+    }
+    // 새 이미지 대입
+    $tmparr = explode('.', $new_photo['name']);
+    $ext = end($tmparr); // 새이미지의 확장자 추출
+    $photo = $id . '.' . $ext; // 새 파일 명
+
+    copy($new_photo['tmp_name'], PROFILE_DIR . "/" . $photo);
+
+    return $photo;
   }
-  // 새 이미지 대입
-  $tmparr = explode('.', $new_photo['name']);
-  $ext = end($tmparr); // 새이미지의 확장자 추출
-  $photo = $id . '.' . $ext; // 새 파일 명
-
-  copy($new_photo['tmp_name'], PROFILE_DIR."/" . $photo);
-
-  return $photo;
-}
-
 }

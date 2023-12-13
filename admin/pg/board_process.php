@@ -2,7 +2,7 @@
 
 include '../common.php';
 include '../../inc/dbconfig.php';
-include '../../inc/board.php';
+include '../../inc/boardmanage.php';
 
 $board_title = (isset($_POST['board_title']) && $_POST['board_title'] != '') ? $_POST['board_title'] : '';
 $board_type  = (isset($_POST['board_type']) && $_POST['board_type'] != '') ? $_POST['board_type'] : '';
@@ -14,7 +14,7 @@ if ($mode == '') {
   die(json_encode($arr)); // {"result":"mode_empty"}
 }
 
-$board = new Board($db);
+$board = new BoardManage($db);
 
 // 게시판 생성
 if ($mode == 'input') {

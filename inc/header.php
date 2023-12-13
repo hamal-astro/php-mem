@@ -42,7 +42,19 @@
           } else { ?>
             <li class="nav-item"><a href="../mypage.php" class="nav-link <?= ($menu_code == '회원정보') ? 'active' : ''; ?>">회원정보</a></li>
           <?php } ?>
-          <li class="nav-item"><a href="../board.php" class="nav-link <?= ($menu_code == 'board') ? 'active' : ''; ?>">게시판</a></li>
+
+          <?php
+          if (isset($boardArr)) {
+            foreach ($boardArr as $row) {
+              echo '<li class="nav-item"><a href="board.php?bcode=' . $row['bcode'] . '" class="nav-link';
+              if (isset($_GET['bcode']) && $_GET['bcode'] == $row['bcode']) {
+                echo ' active';
+              }
+              echo '">' . $row['name'] . '</a></li>';
+            }
+          }
+          ?>
+
           <li class="nav-item"><a href="../pg/logout.php" class="nav-link <?= ($menu_code == 'login') ? 'active' : ''; ?>">로그아웃</a></li>
         <?php
         } else {
