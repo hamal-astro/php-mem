@@ -1,6 +1,5 @@
 function getUrlParams() {
 	const params = {};
-
 	window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
 		params[key] = value;
 	});
@@ -43,11 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		xhr.send(f);
 
 		xhr.onload = () => {
-			if (xhr.status == 200) {
-				alert('통신성공');
-			} else if (xhr.status == 404) {
-				alert('통신실패');
-			}
+			// if (xhr.status == 200) {
+			// 	alert('통신성공');
+			// } else if (xhr.status == 404) {
+			// 	alert('통신실패');
+			// }
 		};
 	});
 });

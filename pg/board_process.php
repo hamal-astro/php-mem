@@ -9,14 +9,13 @@ $bcode   = (isset($_POST['bcode']) && $_POST['bcode'] != '') ? $_POST['bcode'] :
 $subject = (isset($_POST['subject']) && $_POST['subject'] != '') ? $_POST['subject'] : '';
 $content = (isset($_POST['content']) && $_POST['content'] != '') ? $_POST['content'] : '';
 
-
-if ($mode = '') {
+if ($mode == '') {
   $arr = ["result" => "empty_mode"];
   $json_str = json_encode($arr); // php 배열을 json으로 변환
   die($json_str);
 }
 
-if ($bcode = '') {
+if ($bcode == '') {
   $arr = ["result" => "empty_bcode"];
   die(json_encode($arr));
 }
@@ -26,20 +25,19 @@ $member = new Member($db);
 
 if ($mode == "input") {
 
+  preg_match_all("/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/i", $content, $matches);
+
   $memArr = $member->getInfo($ses_id);
   $name = $memArr['name'];
 
-  print_r($memArr);
-  exit;
+  $arr = [
+    'bcode' => $bcode,
+    'id' => $ses_id,
+    'name' => $name,
+    'subject' => $subject,
+    'content' => $content,
+    'ip' => $_SERVER['REMOTE_ADDR'],
+  ];
 
-  // $arr = [
-  //   'bcode' => $bcode,
-  //   'id' => $ses_id,
-  //   'name' => $name,
-  //   'subject' => $subject,
-  //   'content' => $content,
-  //   'ip' => $_SERVER['REMOTE_ADDR'],
-  // ];
-
-  // $board->input($arr);
+  $board->input($arr);
 }
