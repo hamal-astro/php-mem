@@ -25,7 +25,37 @@ $member = new Member($db);
 
 if ($mode == "input") {
 
+  // 이미지 변환하여 저장
   preg_match_all("/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/i", $content, $matches);
+
+  $img_array = [];
+  foreach ($matches[1] as $key => $row) {
+    if (substr($row, 0, 5) != 'data:') {
+      continue;
+    }
+    list($type, $data) = explode(';', $row);
+    list(, $data) = explode(',', $row);
+    $data = base64_decode($data);
+    list(, $ext) = explode('/', $type);
+    $ext = ($ext == 'jpeg') ? 'jpg' : $ext;
+
+    $filename = date('YmdHis') . '_' . $key . '.' . $ext;
+
+    file_put_contents(BOARD_DIR . "/" . $filename, $data);
+
+    $content = str_replace($row, BOARD_WEB_DIR . "/" . $filename, $content);
+    $img_array[] = BOARD_WEB_DIR . "/" . $filename;
+  }
+
+  if ($subject == '') {
+    $arr = ["result" => "empty_subject"];
+    die(json_encode($arr));
+  }
+
+  if ($content == '' || $content == '<p><br></p>') {
+    $arr = ["result" => "empty_content"];
+    die(json_encode($arr));
+  }
 
   $memArr = $member->getInfo($ses_id);
   $name = $memArr['name'];
@@ -40,4 +70,6 @@ if ($mode == "input") {
   ];
 
   $board->input($arr);
+
+  die(json_encode(['result' => 'success']));
 }

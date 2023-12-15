@@ -42,11 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		xhr.send(f);
 
 		xhr.onload = () => {
-			// if (xhr.status == 200) {
-			// 	alert('통신성공');
-			// } else if (xhr.status == 404) {
-			// 	alert('통신실패');
-			// }
+			if (xhr.status == 200) {
+				const data = JSON.parse(xhr.responseText);
+				if (data.result == 'success') {
+					alert('글 등록이 성공했습니다.');
+					self.location.href = './board.php?bcode=' + params['bcode'];
+				}
+			} else if (xhr.status == 404) {
+				alert('통신실패');
+			}
 		};
 	});
 });

@@ -34,6 +34,10 @@ include 'inc/header.php';
   </div>
   <div id="summernote"></div>
 
+  <div class="mt-3">
+    <input type="file" name="attach" id="id_attach" class="form-control">
+  </div>
+
   <div class="mt-3 d-flex gap-2 justify-content-end">
     <button class="btn btn-primary" id="btn_write_submit">확인</button>
     <button class="btn btn-secondary" id="btn_board_list">목록</button>
