@@ -6,4 +6,4 @@ php 실습을 따라해본 것 입니다.
 
 https://www.youtube.com/playlist?list=PLTb3qGCzYjS1sqYn00_g6t5W1Ikhn_dC4
 
-test
+test2
