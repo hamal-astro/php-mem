@@ -56,7 +56,7 @@ $boardArr = $board->list();
     }
     ?>
   </table>
-  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#board_create_modal" id="btn_create_modal">게시판 생성</button>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#board_create_modal" id="btn_create_modal" autocomplete="off">게시판 생성</button>
   </div>
 </main>
 

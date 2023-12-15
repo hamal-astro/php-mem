@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	//게시판 생성 버튼 클릭
 	btn_create_modal.addEventListener('click', () => {
-		board_title.value == '';
+		board_title.value = '';
 		const board_mode = document.querySelector('#board_mode');
 		board_mode.value = 'input';
 		document.querySelector('#modalTitle').textContent = '게시판 생성';
