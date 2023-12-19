@@ -10,13 +10,14 @@ class Board
   // 글 등록
   public function input($arr)
   {
-    $sql = "INSERT INTO board (bcode,id,name,subject,content,ip,create_at) values(:bcode,:id,:name,:subject,:content,:ip,NOW())";
+    $sql = "INSERT INTO board (bcode,id,name,subject,content,files,ip,create_at) values(:bcode,:id,:name,:subject,:content,:files,:ip,NOW())";
     $stmt = $this->conn->prepare($sql);
     $stmt->bindValue(":bcode", $arr['bcode']);
     $stmt->bindValue(":id", $arr['id']);
     $stmt->bindValue(":name", $arr['name']);
     $stmt->bindValue(":subject", $arr['subject']);
     $stmt->bindValue(":content", $arr['content']);
+    $stmt->bindValue(":files", $arr['files']);
     $stmt->bindValue(":ip", $arr['ip']);
     $stmt->execute();
   }

@@ -1,4 +1,16 @@
 <?php
+$err_array = error_get_last();
+
+// echo ini_get('post_max_size');
+// echo (int) ini_get('upload_max_filesize') * 1024 * 1024;
+// exit;
+
+if (isset($_SERVER['CONTENT_LENGTH'])  && $_SERVER['CONTENT_LENGTH'] > (int) ini_get('post_max_size') * 1024 * 1024) {
+
+  $arr = ['result' => 'post_size_exceed'];
+  die(json_encode($arr));
+}
+
 include '../inc/common.php';
 include '../inc/dbconfig.php';
 include '../inc/board.php'; // 게시판 클래스
@@ -57,6 +69,37 @@ if ($mode == "input") {
     die(json_encode($arr));
   }
 
+  // 다중 파일 첨부
+
+
+  //파일 첨부
+  //$_FILES[]
+  // if (isset($_FILES['files']) && $_FILES['files']['name'] != '') {
+  if (isset($_FILES['files'])) {
+    // 우회하여 파일을 3개 초과 업로드 할때 방지
+    if (sizeof($_FILES['files']['name']) > 3) {
+      $arr = ['result' => 'file_upload_count_exceed'];
+      die(json_encode($arr));
+    }
+
+    $tmp_arr = [];
+    foreach ($_FILES['files']['name'] as $key => $val) {
+      // $_FILES['files']['name'][$key];
+      $full_str = '';
+      $tmparr = explode('.', $_FILES['files']['name'][$key]);
+      $ext = end($tmparr);
+      $flag = rand(1000, 9999);
+      $filename = 'a' . date('YmdHis') . $flag . '.' . $ext;
+      $file_ori = $_FILES['files']['name'][$key];
+      /// a202311111111.jpg|새파일.jpg
+      copy($_FILES['files']['tmp_name'][$key], BOARD_DIR . "/" . $filename);
+      $full_str = $filename . '|' . $file_ori;
+      $tmp_arr[] = $full_str;
+    }
+    $file_list_str = implode('?', $tmp_arr);
+  }
+
+
   $memArr = $member->getInfo($ses_id);
   $name = $memArr['name'];
 
@@ -66,6 +109,7 @@ if ($mode == "input") {
     'name' => $name,
     'subject' => $subject,
     'content' => $content,
+    'files' => $file_list_str,
     'ip' => $_SERVER['REMOTE_ADDR'],
   ];
 

@@ -94,3 +94,9 @@ alter table board add index `bcode_id`(`bcode`, `id`);
 ALTER TABLE board DROP INDEX `bcode_id`;
 
 DROP Table board;
+
+ALTER Table board
+ADD
+    COLUMN files VARCHAR(255) DEFAULT '' AFTER content;
+
+ALTER Table board CHANGE COLUMN files files TEXT;

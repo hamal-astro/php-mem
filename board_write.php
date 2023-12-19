@@ -35,7 +35,7 @@ include 'inc/header.php';
   <div id="summernote"></div>
 
   <div class="mt-3">
-    <input type="file" name="attach" id="id_attach" class="form-control">
+    <input type="file" name="attach" id="id_attach" multiple class="form-control">
   </div>
 
   <div class="mt-3 d-flex gap-2 justify-content-end">
