@@ -179,7 +179,7 @@ class Member
       $where = " WHERE " . $sn_str . "=:sf ";
     }
     // 초단위 절삭
-    $sql = "select idx,id,name,email,DATE_FORMAT(create_at,'%Y-%m-%d %H:%i') AS create_at 
+    $sql = "SELECT idx,id,name,email,DATE_FORMAT(create_at,'%Y-%m-%d %H:%i') AS create_at 
     from member " . $where . "
     order by idx desc
     limit " . $start . "," . $limit;
@@ -211,7 +211,7 @@ class Member
       $where = " WHERE " . $sn_str . "=:sf ";
     }
 
-    $sql = "select count(*) cnt from member " . $where;
+    $sql = "SELECT count(*) cnt from member " . $where;
     $stmt = $this->conn->prepare($sql);
     if ($where != '') {
       $stmt->bindParam(':sf', $paramArr['sf']);

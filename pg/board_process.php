@@ -88,6 +88,14 @@ if ($mode == "input") {
       $full_str = '';
       $tmparr = explode('.', $_FILES['files']['name'][$key]);
       $ext = end($tmparr);
+
+      $allowed_file_ext = ['txt', 'png', 'jpg', 'jpeg'];
+      // $not_allowed_file_ext = ['exe', 'txt', 'xls'];
+      // if (in_array($ext, $not_allowed_file_ext)) {
+      if (!in_array($ext, $allowed_file_ext)) {
+        $arr = ['result' => 'not_allowed_file'];
+        die(json_encode($arr));
+      }
       $flag = rand(1000, 9999);
       $filename = 'a' . date('YmdHis') . $flag . '.' . $ext;
       $file_ori = $_FILES['files']['name'][$key];

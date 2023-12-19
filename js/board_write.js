@@ -6,6 +6,13 @@ function getUrlParams() {
 	return params;
 }
 
+function getExtensionOfFilename(filename) {
+	const filelen = filename.length; // 문자열의 길이
+	// 확장자 앞의 컴마 찾기
+	const lastdot = filename.lastIndexOf('.'); // 그냥 IndexOF는 첫번째 컴마
+	return filename.substring(lastdot + 1, filelen).toLowerCase(); //substring (시작위치,끝위치)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 	// 게시판 목록으로 이동하기
 	const btn_board_list = document.querySelector('#btn_board_list');
@@ -45,8 +52,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		f.append('content', markupStr); // 게시물 내용
 		f.append('bcode', params['bcode']); // 게시물 코드
 		f.append('mode', 'input'); // 모드 : 글등록
+		let ext = '';
 		// 파일 첨부
 		for (const file of id_attach.files) {
+			if (file.size > 40 * 1024 * 1024) {
+				alert('용량이 40M 보다 큰 파일은 게시 할 수 없습니다.');
+				id_attach.value = '';
+				return false;
+			}
+			ext = getExtensionOfFilename(file.name);
+			const allowed_file = ['txt', 'png', 'jpg', 'jpeg'];
+			if (allowed_file.includes(ext) == false) {
+				alert('첨부할 수 없는 확장자입니다.' + allowed_file + '가능');
+				id_attach.value = '';
+				return false;
+			}
 			f.append('files[]', file);
 		}
 
@@ -66,6 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 					return false;
 				} else if (data.result == 'post_size_exceed') {
 					alert('첨부파일의 용량은 총 40M이하만 허용 됩니다.');
+					id_attach.value = '';
+					return false;
+				} else if (data.result == 'not_allowed_file') {
+					alert("첨부할 수 없는 확장자입니다. 'txt', 'png', 'jpg', 'jpeg' 가능");
 					id_attach.value = '';
 					return false;
 				}
