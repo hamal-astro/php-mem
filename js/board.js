@@ -34,4 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	btn_all.addEventListener('click', () => {
 		self.location.href = './board.php?bcode=' + params['bcode'];
 	});
+
+	//글보기
+	const trs = document.querySelectorAll('.tr');
+	trs.forEach((box) => {
+		box.addEventListener('click', () => {
+			self.location.href = './board_view.php?bcode=' + params['bcode'] + '&idx=' + box.dataset.idx;
+		});
+	});
 });
