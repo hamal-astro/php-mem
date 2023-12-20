@@ -8,11 +8,14 @@ function getUrlParams() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+	const params = getUrlParams();
+	// 글쓰기버튼
 	const btn_write = document.querySelector('#btn_write');
 	btn_write.addEventListener('click', () => {
-		const params = getUrlParams();
 		self.location.href = './board_write.php?bcode=' + params['bcode'];
 	});
+
+	// 검색 버튼
 	const btn_search = document.querySelector('#btn_search');
 	btn_search.addEventListener('click', () => {
 		const sf = document.querySelector('#sf');
@@ -22,9 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			sf.focus();
 			return false;
 		}
-		const params = getUrlParams();
-
 		self.location.href =
 			'./board.php?bcode=' + params['bcode'] + '&sn=' + sn.value + '&sf=' + sf.value;
+	});
+
+	// 검색 후 전체 목록 버튼
+	const btn_all = document.querySelector('#btn_all');
+	btn_all.addEventListener('click', () => {
+		self.location.href = './board.php?bcode=' + params['bcode'];
 	});
 });

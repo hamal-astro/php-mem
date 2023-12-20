@@ -58,11 +58,15 @@ include_once 'inc/header.php';
       <th>조회수</th>
     </tr>
     <?php
+    $cnt = 0;
+    $ntotal = $total - ($page - 1) * $limit;
     foreach ($boardRs as $boardRow) {
+      $number = $ntotal - $cnt;
+      $cnt++;
     ?>
 
       <tr>
-        <td><?= $boardRow['idx']; ?></td>
+        <td><?= $number; ?></td>
         <td><?= $boardRow['subject']; ?></td>
         <td><?= $boardRow['name']; ?></td>
         <td><?= $boardRow['create_at']; ?></td>
@@ -72,13 +76,14 @@ include_once 'inc/header.php';
   </table>
   <div class="container mt-3 w-50 d-flex gap-2">
     <select name="" id="sn" class="form-select w-25">
-      <option value="1">제목+내용</option>
-      <option value="2">제목</option>
-      <option value="3">내용</option>
-      <option value="4">글쓴이</option>
+      <option value="1" <?php if ($sn == 1) echo ' selected'; ?>>제목+내용</option>
+      <option value="2" <?php if ($sn == 2) echo ' selected'; ?>>제목</option>
+      <option value="3" <?php if ($sn == 3) echo ' selected'; ?>>내용</option>
+      <option value="4" <?php if ($sn == 4) echo ' selected'; ?>>글쓴이</option>
     </select>
-    <input type="text" class="form-control w-25" id="sf" value="">
+    <input type="text" class="form-control w-25" id="sf" value="<?= $sf ?>">
     <button class="btn btn-primary w-25" id="btn_search">검색</button>
+    <button class="btn btn-info w-25" id="btn_all">전체목록</button>
   </div>
 
   <div class="d-flex justify-content-between align-items-start">
