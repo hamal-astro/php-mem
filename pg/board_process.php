@@ -1,10 +1,6 @@
 <?php
 $err_array = error_get_last();
 
-// echo ini_get('post_max_size');
-// echo (int) ini_get('upload_max_filesize') * 1024 * 1024;
-// exit;
-
 if (isset($_SERVER['CONTENT_LENGTH'])  && $_SERVER['CONTENT_LENGTH'] > (int) ini_get('post_max_size') * 1024 * 1024) {
 
   $arr = ['result' => 'post_size_exceed'];
@@ -70,11 +66,8 @@ if ($mode == "input") {
   }
 
   // 다중 파일 첨부
-
-
   //파일 첨부
-  //$_FILES[]
-  // if (isset($_FILES['files']) && $_FILES['files']['name'] != '') {
+  $file_list_str = '';
   if (isset($_FILES['files'])) {
     // 우회하여 파일을 3개 초과 업로드 할때 방지
     if (sizeof($_FILES['files']['name']) > 3) {
